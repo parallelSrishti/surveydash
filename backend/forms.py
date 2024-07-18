@@ -7,7 +7,7 @@ class RegistrationForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=6, max=30)])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
-    roles = SelectMultipleField('Roles', choices=[('employee', 'Employee'), ('manager', 'Manager')], validators=[DataRequired()])
+    roles = SelectMultipleField('Roles', choices=[('employee', 'Employee')], validators=[DataRequired()])
     submit = SubmitField('Sign Up')
 
 class LoginForm(FlaskForm):
