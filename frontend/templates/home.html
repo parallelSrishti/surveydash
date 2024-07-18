@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Employee Wellness Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h4>Current Wellness Report</h4>
+                </div>
+                <div class="card-body">
+                    <h5>Hello, {{ current_user.name }}!</h5>
+                    <p>Here is a snapshot of your wellness scores:</p>
+                    {% if analysis and analysis.current_score is not none %}
+                        <h5>Current Total Score: {{ analysis.current_score }}</h5>
+                        <canvas id="scoreChart"></canvas>
+                    {% else %}
+                        <p>New user, please take the survey.</p>
+                    {% endif %}
+                    <div class="text-center mt-4">
+                        <a href="{{ url_for('main.survey') }}" class="btn btn-primary">Take Survey</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if analysis and analysis.current_score is not none %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('scoreChart').getContext('2d');
+    var scoreChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ analysis.dates | safe }},
+            datasets: [{
+                label: 'Total Score Over Time',
+                data: {{ analysis.scores | safe }},
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                fill: false
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endif %}
+{% endblock %}

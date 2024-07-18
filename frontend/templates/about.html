@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - Employee Wellness Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>About Us</h2>
+    <p>Welcome to the Employee Wellness Dashboard. Our mission is to help organizations improve the health and well-being of their employees through comprehensive wellness surveys and insightful reports.</p>
+    <p>We believe that employee wellness is critical to the success of any organization. By providing a platform for employees to share their wellness experiences and receive feedback, we aim to foster a healthier, more productive work environment.</p>
+    <p>Our dashboard offers easy-to-use survey tools, detailed reports, and actionable insights that help organizations identify areas for improvement and track progress over time.</p>
+    <p>Thank you for visiting our site. If you have any questions or need further information, please feel free to <a href="{{ url_for('main.contact') }}">contact us</a>.</p>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to the Employee Wellness Dashboard</h1>
+    <p class="lead">This is the landing page of the application. Here you can find general information about the app.</p>
+    <hr class="my-4">
+    <p>Explore the resources or log in to get started with your wellness surveys.</p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('main.login') }}" role="button">Login</a>
+    <a class="btn btn-secondary btn-lg" href="{{ url_for('main.register') }}" role="button">Register</a>
+</div>
+{% endblock %}
