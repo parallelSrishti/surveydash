@@ -4,6 +4,9 @@ from flask_login import LoginManager
 from backend.models import db, User, Role
 from configuration import DevelopmentConfig  # or ProductionConfig
 from backend.routes import init_views
+import nltk
+nltk.download('vader_lexicon')
+
 
 def create_app():
     app = Flask(__name__, static_folder='frontend/static', template_folder='frontend/templates')

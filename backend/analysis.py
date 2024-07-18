@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import io
 import base64
 from datetime import datetime
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 def analyze_reports(reports):
     scores = []
@@ -34,7 +35,14 @@ def calculate_total_score(survey):
         elif response == '3':
             total_score += 1
 
-    # Assume +1 for any response to the 10th question
-    total_score += 1 if survey.question10 else 0
+    analyzer = SentimentIntensityAnalyzer()
+    sentiment_score = analyzer.polarity_scores(survey.question10)['compound']
+    
+    # Adjust the score based on sentiment analysis
+    if sentiment_score >= 0.05:
+        total_score += 1
+    elif sentiment_score <= -0.05:
+        total_score += -1
+
 
     return total_score
